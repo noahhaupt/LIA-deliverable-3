@@ -39,4 +39,28 @@ for y in categorical_variables:
     print("Mode: ", data[y].mode())
     print()
     #Proportion???
-    
+
+#Part 5 - Multivariate Non-Graphical EDA
+#a)
+#Relationship between country and treatment type
+print(pd.crosstab(data["Treatment Type"],data["Country"]))
+print()
+#Relationship between disease and treatment type
+print(pd.crosstab(data["Disease Name"],data["Treatment Type"]))
+print()
+#Relationship between Gender and disease type
+print(pd.crosstab(data["Disease Name"],data["Gender"]))
+print()
+
+#b)
+# The 'normalize' keyword will not work with print(), however, putting the following code into the console will give the desired output of the normalized data:
+print(pd.crosstab(data["Treatment Type"],data["Country"], normalize="index"))
+print()
+print(pd.crosstab(data["Disease Name"],data["Treatment Type"], normalize="index"))
+print()
+print(pd.crosstab(data["Disease Name"],data["Gender"], normalize="index"))
+print()
+
+#c)
+print(pd.crosstab(index = [data["Country"], data["Gender"]], columns = data["Treatment Type"]))
+print()
