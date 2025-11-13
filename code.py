@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 df = pd.read_csv("Global Health Statistics.csv")
+
+#Part 2 -Preliminary Steps
+#Filtering the data:
 specific_countries = ["Canada", "USA"]
-data = filtered_data = df[df["Country"].isin(specific_countries)]
-#Part 3
+data = df[df["Country"].isin(specific_countries)]
+
+print(data.head())
+print(data.info())
+print(data.describe())
+unduplicated_data = data.drop_duplicates()
+print(unduplicated_data)
+#data and unduplicated_data have the same number of rows and columns, meaning that there are no duplicatet rows in the dataset.
+
+
+#Part 3 - Univariate Non-Graphical EDA
 #Numerical variables
 numeric_variables = ["Year","Prevalence Rate (%)","Incidence Rate (%)","Mortality Rate (%)","Population Affected","Healthcare Access (%)", "Doctors per 1000","Hospital Beds per 1000", "Average Treatment Cost (USD)", "Recovery Rate (%)","DALYs","Improvement in 5 Years (%)","Per Capita Income (USD)", "Education Index", "Urbanization Rate (%)"]
 
@@ -27,3 +39,4 @@ for y in categorical_variables:
     print("Mode: ", data[y].mode())
     print()
     #Proportion???
+    
