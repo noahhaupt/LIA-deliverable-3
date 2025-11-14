@@ -40,6 +40,7 @@ for y in categorical_variables:
     print()
     #Proportion???
     
+    
 #Part 4 - Univariate graphical EDA    
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -55,7 +56,7 @@ for col in numerical:
 
 # By Gender
 for col in numerical:
-    sns.histplot(data, x=col, hue="Gender", bins=15)
+    sns.displot(data, x=col, hue="Gender", kind="hist", bins=15)
     plt.show()
 
 # Stacked histogram
@@ -75,12 +76,12 @@ for col in numerical:
 
 # KDE
 for col in numerical:
-    sns.kdeplot(data[col])
+    sns.displot(data, x=col, hue="Gender", kind="kde")
     plt.show()
 
 # Emperical cumulative dist
 for col in numerical:
-    sns.ecdfplot(data[col])
+    sns.displot(data, x=col, kind="ecdf" )
     plt.show()
     
 
@@ -95,7 +96,7 @@ for col in numerical:
 
 #By gender
 for col in numerical: 
-    sns.histplot(data, x=col, hue="Gender", bins=15) 
+    sns.displot(data, x=col, hue="Gender", kind="hist", bins=15) 
     plt.show()
     
 #Stacked histograms    
@@ -115,12 +116,12 @@ for col in numerical:
     
 #KDE
 for col in numerical: 
-    sns.kdeplot(data[col]) 
+    sns.displot(data, x=col, kind="kde") 
     plt.show()
     
 #Emperical cumulative dist
 for col in numerical: 
-    sns.ecdfplot(data[col])
+    sns.displot(data, x=col, kind="ecdf")
     plt.show()
     
     
@@ -135,7 +136,7 @@ for col in numerical:
     
 #By gender
 for col in numerical:
-    sns.histplot(data, x=col, hue="Gender", bins=15) 
+    sns.displot(data, x=col, hue="Gender", kind="hist", bins=15) 
     plt.show()
     
 #Stacked histogram   
@@ -155,12 +156,12 @@ for col in numerical:
     
 #KDE
 for col in numerical: 
-    sns.kdeplot(data[col]) 
+    sns.displot(data, x=col, kind="kde") 
     plt.show()
     
 #Emperical cumulative dist
 for col in numerical: 
-    sns.ecdfplot(data[col]) 
+    sns.displot(data, x=col, kind="ecdf") 
     plt.show()
     
     
