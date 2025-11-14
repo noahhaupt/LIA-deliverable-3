@@ -5,7 +5,8 @@ df = pd.read_csv("Global Health Statistics.csv")
 #Part 2 -Preliminary Steps
 #Filtering the data:
 specific_countries = ["Canada", "USA"]
-data = df[df["Country"].isin(specific_countries)]
+specific_years = [2024]
+data = df[df["Country"].isin(specific_countries) & df["Year"].isin(specific_years)]
 
 print(data.head())
 print(data.info())
@@ -53,7 +54,6 @@ print(pd.crosstab(data["Disease Name"],data["Gender"]))
 print()
 
 #b)
-# The 'normalize' keyword will not work with print(), however, putting the following code into the console will give the desired output of the normalized data:
 print(pd.crosstab(data["Treatment Type"],data["Country"], normalize="index"))
 print()
 print(pd.crosstab(data["Disease Name"],data["Treatment Type"], normalize="index"))
@@ -64,3 +64,13 @@ print()
 #c)
 print(pd.crosstab(index = [data["Country"], data["Gender"]], columns = data["Treatment Type"]))
 print()
+
+#Part 6
+import seaborn as sns
+#6.2 Visualizing statiscal relationships
+sns.catplot(x = data["Treatment Type"], y = data["Mortality Rate (%)"])
+
+
+
+
+
