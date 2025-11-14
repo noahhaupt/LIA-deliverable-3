@@ -191,12 +191,45 @@ print()
 print(pd.crosstab(index = [data["Country"], data["Gender"]], columns = data["Treatment Type"]))
 print()
 
-#Part 6
+#Part 6 - Multivariate graphical EDA 
+
+#6.1 Visualizing statistical relationships (5 plots)
+
 import seaborn as sns
-#6.2 Visualizing statiscal relationships
-sns.catplot(x = data["Treatment Type"], y = data["Mortality Rate (%)"])
+
+#Question A: How does Prevalance Rate (%) relate to Mortality Rate (%) in Canada vs USA?
+sns.relplot(data=data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
+plt.show()
+
+#Question B: How do Treatment Type, Population Affected and Country relate to Average Treatment Cost and Recovery Rate?
+sns.relplot(data=data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Treatment Type", size="Population Affected", col="Country")
+plt.show()
+
+#Question C: How has Mortality Rate (%) changed over the years in Canada vs USA?
+sns.relplot(data=data, x="Year", y="Mortality Rate (%)", kind="line", hue="Country")
+plt.show()
+
+#Question D:
+    
+#Question E: In Canada, is there a linear relationship between Healthcare Access (%) and Recovery Rate (%)?
+sns.lmplot(data=data, x="Healthcare Access (%)", y="Recovery Rate (%)")
+plt.show()
 
 
 
 
+
+#6.3 Visualizing bivariate distributions
+
+# Question A: How do Prevalence Rate (%) and Treatment cost vary together?
+sns.displot(data=data, x="Prevalence Rate (%)", y="Average Treatment Cost (USD)", kind="hist", binwidth=(5, 500), cbar=True)
+plt.show()
+
+# Question B: What is the smooth density pattern between Healthcare Access (%) and Recovery Rate (%)? 
+sns.displot(data=data, x="Healthcare Access (%)", y="Recovery Rate (%)", kind="kde", levels=10, thresh=0.05)
+plt.show()
+
+# Question C: How does the joint distribution of Doctors per 1000 vs Hospital Beds per 1000 differ between Canada and USA?
+sns.displot(data=data, x="Doctors per 1000", y="Hospital Beds per 1000", hue="Country", kind="kde")
+plt.show()
 
