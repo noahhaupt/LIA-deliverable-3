@@ -40,7 +40,132 @@ for y in categorical_variables:
     print("Mode: ", data[y].mode())
     print()
     #Proportion???
+    
+#Part 4 - Univariate graphical EDA    
+import seaborn as sns
+import matplotlib.pyplot as plt
 
+#5 variables
+numerical= ["Prevalence Rate (%)","Incidence Rate (%)","Mortality Rate (%)", "Population Affected","Healthcare Access (%)"]
+
+
+# Histograms
+for col in numerical:
+    sns.histplot(data[col], bins=15)
+    plt.show()
+
+# By Gender
+for col in numerical:
+    sns.histplot(data, x=col, hue="Gender", bins=15)
+    plt.show()
+
+# Stacked histogram
+for col in numerical:
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="stack")
+    plt.show()
+
+# Dodge bars
+for col in numerical:
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="dodge")
+    plt.show()
+
+# Normalized histograms
+for col in numerical:
+    sns.histplot(data[col], bins=15, stat="probability")
+    plt.show()
+
+# KDE
+for col in numerical:
+    sns.kdeplot(data[col])
+    plt.show()
+
+# Emperical cumulative dist
+for col in numerical:
+    sns.ecdfplot(data[col])
+    plt.show()
+    
+
+#5 new variables
+numerical = ["Doctors per 1000","Hospital Beds per 1000","Average Treatment Cost (USD)", "Recovery Rate (%)","Per Capita Income (USD)"]    
+
+
+#Histograms
+for col in numerical: 
+    sns.histplot(data[col], bins=15)
+    plt.show()
+
+#By gender
+for col in numerical: 
+    sns.histplot(data, x=col, hue="Gender", bins=15) 
+    plt.show()
+    
+#Stacked histograms    
+for col in numerical: 
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="stack") 
+    plt.show()
+    
+#Dodge bars
+for col in numerical: 
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="dodge")
+    plt.show()
+    
+#Normalized histograms
+for col in numerical:
+    sns.histplot(data[col], bins=15, stat="probability") 
+    plt.show()
+    
+#KDE
+for col in numerical: 
+    sns.kdeplot(data[col]) 
+    plt.show()
+    
+#Emperical cumulative dist
+for col in numerical: 
+    sns.ecdfplot(data[col])
+    plt.show()
+    
+    
+#5 new variables
+numerical= ["Education Index","Urbanization Rate (%)","Improvement in 5 Years (%)", "DALYs","Year"]
+
+
+#Histograms
+for col in numerical: 
+    sns.histplot(data[col], bins=15) 
+    plt.show()
+    
+#By gender
+for col in numerical:
+    sns.histplot(data, x=col, hue="Gender", bins=15) 
+    plt.show()
+    
+#Stacked histogram   
+for col in numerical: 
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="stack") 
+    plt.show()
+
+#Dodge bars
+for col in numerical:
+    sns.histplot(data, x=col, hue="Gender", bins=15, multiple="dodge") 
+    plt.show()
+    
+#Normalized histograms
+for col in numerical:
+    sns.histplot(data[col], bins=15, stat="probability") 
+    plt.show()
+    
+#KDE
+for col in numerical: 
+    sns.kdeplot(data[col]) 
+    plt.show()
+    
+#Emperical cumulative dist
+for col in numerical: 
+    sns.ecdfplot(data[col]) 
+    plt.show()
+    
+    
+    
 #Part 5 - Multivariate Non-Graphical EDA
 #a)
 #Relationship between country and treatment type
