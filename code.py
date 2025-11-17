@@ -85,25 +85,29 @@ print()
 #Part 6 - Multivariate graphical EDA 
 
 #6.1 Visualizing statistical relationships (5 plots)
+#1
 sns.relplot(data, x = "Average Treatment Cost (USD)", y = "Healthcare Access (%)", col = "Country")
+#2
 sns.relplot(data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Improvement in 5 Years (%)", size="Population Affected", col="Country")
-
+#3
 years = [2020,2021,2022,2023,2024]
 years_data = data = df[df["Country"].isin(specific_countries) & df["Year"].isin(years)]
-sns.relplot(data=years_data, x = "Year", y ="Treatment Cost (USD)", kind="line", hue="Country")
-
-
-
-sns.relplot(data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
-
-
-
-
-sns.lmplot(data, x="Healthcare Access (%)", y="Recovery Rate (%)")
-
+sns.relplot(data=years_data, x = "Year", y ="Average Treatment Cost (USD)", kind="line", hue="Country")
+#The x variable "Year" is used because it repreesents time, which shows a continuous graph, like the flow of time. This allows it to be easily read.
+#4
+sns.relplot(data=years_data, x = "Year", y ="Healthcare Access (%)", kind="line", errorbar = "sd", hue="Country")
+#5
+sns.lmplot(data, x="Healthcare Access (%)", y="Recovery Rate (%)", col = "Country", hue = "Gender")
 
 #6.2 Visualizing Categorical data (10 plots)
-
+#1
+sns.catplot(data, x = "Gender", y = "Recovery Rate (%)")
+#2
+sns.catplot(data, x = "Availability of Vaccines/Treatment", y = "Incidence Rate (%)", jitter = False)
+#Availability of Vaccines/Treatment was used because it only contains 2 possible outcomes: Yes and No. This means that jitter will provide no additional information/insight on the data.
+#3
+sns.catplot(data, x = "Country", y = "Improvement in 5 Years (%)", hue = "Gender", kind = "swarm")
+#4
 
 
 #6.3 Visualizing bivariate distributions (3 plots)
