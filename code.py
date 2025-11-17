@@ -90,8 +90,8 @@ sns.relplot(data, x = "Average Treatment Cost (USD)", y = "Healthcare Access (%)
 #2
 sns.relplot(data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Improvement in 5 Years (%)", size="Population Affected", col="Country")
 #3
-years = [2020,2021,2022,2023,2024]
-years_data = data = df[df["Country"].isin(specific_countries) & df["Year"].isin(years)]
+years = [2022,2023,2024]
+years_data = df[df["Country"].isin(specific_countries) & df["Year"].isin(years)]
 sns.relplot(data=years_data, x = "Year", y ="Average Treatment Cost (USD)", kind="line", hue="Country")
 #The x variable "Year" is used because it repreesents time, which shows a continuous graph, like the flow of time. This allows it to be easily read.
 #4
@@ -108,7 +108,22 @@ sns.catplot(data, x = "Availability of Vaccines/Treatment", y = "Incidence Rate 
 #3
 sns.catplot(data, x = "Country", y = "Improvement in 5 Years (%)", hue = "Gender", kind = "swarm")
 #4
-
+sns.catplot(data, x = "Treatment Type", y = "Recovery Rate (%)", hue = "Country", kind = "box")
+#5
+sns.catplot(data, x = "Treatment Type", y = "Improvement in 5 Years (%)", kind = "boxen")
+#6
+sns.catplot(years_data, x = "Healthcare Access (%)", y = "Year", hue = "Country", kind = "violin", bw_adjust = 5)
+#7
+g = sns.catplot(data, "Treatment Type", y = "Average Treatment Cost (USD)", kind = "violin", inner = None)
+sns.swarplot(data, "Treatment Type", y = "Average Treatment Cost (USD)", color = "k", size = 3, ax = g.ax)
+#8
+diseases = ["COVID-19", "Malaria", "HIV/AIDS"]
+diseases_data = df[df["Country"].isin(specific_countries) & df["Disease Name"].isin(diseases)]
+sns.catplot(diseases_data, x = "Prevelance Rate (%)", y = "Disease Name", hue = "Country", errorbar = ("pi", 95))
+#9
+sns.catplot(diseases_data, x = "Disease Name", y = "Recovery Rate (%)", hue = "Gender", linestyles = ["-", "--"], kind = "point", errorbar = ("pi", 90))
+#10
+sns.catplot(x = categorical_variables, kind = "count")
 
 #6.3 Visualizing bivariate distributions (3 plots)
 sns.displot(data, x="Prevalence Rate (%)", y="Average Treatment Cost (USD)", kind="hist", binwidth=(10, .5), cbar=True)
