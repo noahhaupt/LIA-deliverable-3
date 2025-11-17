@@ -85,11 +85,19 @@ print()
 #Part 6 - Multivariate graphical EDA 
 
 #6.1 Visualizing statistical relationships (5 plots)
-sns.relplot(data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
-sns.relplot(data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Treatment Type", size="Population Affected", col="Country")
+sns.relplot(data, x = "Average Treatment Cost (USD)", y = "Healthcare Access (%)", col = "Country")
+sns.relplot(data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Improvement in 5 Years (%)", size="Population Affected", col="Country")
 
-#wrong
-sns.relplot(data, x="Year", y="Mortality Rate (%)", kind="line", hue="Country")
+years = [2020,2021,2022,2023,2024]
+years_data = data = df[df["Country"].isin(specific_countries) & df["Year"].isin(years)]
+sns.relplot(data=years_data, x = "Year", y ="Treatment Cost (USD)", kind="line", hue="Country")
+
+
+
+sns.relplot(data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
+
+
+
 
 sns.lmplot(data, x="Healthcare Access (%)", y="Recovery Rate (%)")
 
