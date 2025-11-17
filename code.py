@@ -18,7 +18,7 @@ print(unduplicated_data)
 
 #Part 3 - Univariate Non-Graphical EDA
 #Numerical variables
-numeric_variables = ["Year","Prevalence Rate (%)","Incidence Rate (%)","Mortality Rate (%)","Population Affected","Healthcare Access (%)", "Doctors per 1000","Hospital Beds per 1000", "Average Treatment Cost (USD)", "Recovery Rate (%)","DALYs","Improvement in 5 Years (%)","Per Capita Income (USD)", "Education Index", "Urbanization Rate (%)"]
+numeric_variables = ["Prevalence Rate (%)","Incidence Rate (%)","Mortality Rate (%)","Population Affected","Healthcare Access (%)", "Doctors per 1000","Hospital Beds per 1000", "Average Treatment Cost (USD)", "Recovery Rate (%)","DALYs","Improvement in 5 Years (%)","Per Capita Income (USD)", "Education Index", "Urbanization Rate (%)"]
 
 for x in numeric_variables:
     print(x,"information:")
@@ -36,6 +36,7 @@ categorical_variables = ["Country", "Disease Name", "Disease Category", "Gender"
 for y in categorical_variables:
     print(y,"information:")
     print(data[y].value_counts())
+    print(data[y].value_counts(normalize = "index"))
     print("Number of unique values: ", data[y].nunique())
     print("Mode: ", data[y].mode())
     print()
@@ -54,7 +55,7 @@ for variable in numerical:
     sns.displot(data, x = variable, kind = "kde", bw_adjust = .2)
     sns.displot(data, x = variable, hue ="Country", kind = "ecdf")
 #The graphs were plotted and certain graphs were chosen for each which represent the values properly.
-# In the report, 5 numerical variables were described per team member, for a total of 15.
+# In the report, 5 numerical variables were described per team member, for a total of 14 plots.
 
     
 #Part 5 - Multivariate Non-Graphical EDA
@@ -84,35 +85,21 @@ print()
 #Part 6 - Multivariate graphical EDA 
 
 #6.1 Visualizing statistical relationships (5 plots)
+sns.relplot(data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
+sns.relplot(data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Treatment Type", size="Population Affected", col="Country")
 
-import seaborn as sns
+#wrong
+sns.relplot(data, x="Year", y="Mortality Rate (%)", kind="line", hue="Country")
 
-#Question A: How does Prevalance Rate (%) relate to Mortality Rate (%) in Canada vs USA?
-sns.relplot(data=data, x="Prevalence Rate (%)", y="Mortality Rate (%)", col="Country")
+sns.lmplot(data, x="Healthcare Access (%)", y="Recovery Rate (%)")
 
-#Question B: How do Treatment Type, Population Affected and Country relate to Average Treatment Cost and Recovery Rate?
-sns.relplot(data=data, x="Average Treatment Cost (USD)", y="Recovery Rate (%)", hue="Treatment Type", size="Population Affected", col="Country")
 
-#Question C: How has Mortality Rate (%) changed over the years in Canada vs USA?
-sns.relplot(data=data, x="Year", y="Mortality Rate (%)", kind="line", hue="Country")
-
-#Question D:
-    
-#Question E: In Canada, is there a linear relationship between Healthcare Access (%) and Recovery Rate (%)?
-sns.lmplot(data=data, x="Healthcare Access (%)", y="Recovery Rate (%)")
+#6.2 Visualizing Categorical data (10 plots)
 
 
 
-
-
-#6.3 Visualizing bivariate distributions
-
-# Question A: How do Prevalence Rate (%) and Treatment cost vary together?
-sns.displot(data=data, x="Prevalence Rate (%)", y="Average Treatment Cost (USD)", kind="hist", binwidth=(5, 500), cbar=True)
-
-# Question B: What is the smooth density pattern between Healthcare Access (%) and Recovery Rate (%)? 
-sns.displot(data=data, x="Healthcare Access (%)", y="Recovery Rate (%)", kind="kde", levels=10, thresh=0.05)
-
-# Question C: How does the joint distribution of Doctors per 1000 vs Hospital Beds per 1000 differ between Canada and USA?
-sns.displot(data=data, x="Doctors per 1000", y="Hospital Beds per 1000", hue="Country", kind="kde")
+#6.3 Visualizing bivariate distributions (3 plots)
+sns.displot(data, x="Prevalence Rate (%)", y="Average Treatment Cost (USD)", kind="hist", binwidth=(10, .5), cbar=True)
+sns.displot(data, x="Healthcare Access (%)", y="Recovery Rate (%)", kind="kde", levels=10, thresh=0.05)
+sns.displot(data, x="Doctors per 1000", y="Hospital Beds per 1000", hue="Country", kind="kde")
 
